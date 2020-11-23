@@ -45,12 +45,12 @@ Il laboratorio di Informatica del Polo Marzotto è utilizzato da tre tipi di ute
 I professori hanno priorità su tutti nell'accesso al laboratorio, i tesisti hanno priorità sugli studenti.
 
 Nessuno può essere interrotto mentre sta usando un computer. Scrivere un programma JAVA che simuli il comportamento degli utenti e del tutor. Il programma riceve in ingresso il numero di studenti, tesisti e professori che utilizzano il laboratorio ed attiva un thread per ogni utente. Ogni utente accede k volte al laboratorio, con k generato casualmente. Simulare l'intervallo di tempo che intercorre tra un accesso ed il successivo e l'intervallo di permanenza in laboratorio mediante il metodo sleep. Il tutor deve coordinare gli accessi al laboratorio. Il programma deve terminare quando tutti gli utenti hanno completato i loro accessi al laboratorio.
-<br>
+<br><br><br>
 
 ## Assignment 04 - Laboratorio di informatica con Monitor
 
 Risolvere il problema della simulazione del Laboratorio di informatica, dell'assignment precedente, utilizzando il costrutto di Monitor.
-<br>
+<br><br><br>
 
 ## Assignment 05 - File Crawler
 
