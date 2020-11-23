@@ -24,9 +24,12 @@ public class Handler implements Runnable {
             InputStream inStream = connectionSocket.getInputStream();
             String HTTPRequest = new String(inStream.readNBytes(100));
             int indexOfFirstNewLine = HTTPRequest.indexOf("\n");
-            //Si prende la prima riga del request message(la request line)
-            //lo spezza e si prende il path
-            //si toglie il simbolo "/" da inizio path
+
+            /**
+             * Si prende la prima riga del request message(la request line)
+             * lo si spezza e si prende il path
+             * si toglie il simbolo "/" da inizio path
+             */
             String pathRequested = HTTPRequest.substring(0, indexOfFirstNewLine).split(" ")[1].substring(1);
             System.out.println(Thread.currentThread().getName() + "\tRequested: " + pathRequested);
 
