@@ -50,4 +50,47 @@ Nessuno può essere interrotto mentre sta usando un computer. Scrivere un progra
 ## Assignment 04 - Laboratorio di informatica con Monitor
 
 Risolvere il problema della simulazione del Laboratorio di informatica, dell'assignment precedente, utilizzando il costrutto di Monitor.
+<br>
 
+## Assignment 05 - File Crawler
+
+Si scriva un programma JAVA che 
+
+* riceve in input un filepath che individua una directory D
+* stampa le informazioni del contenuto di quella directory e, ricorsivamente, di tutti i file contenuti nelle sottodirectory di D 
+
+iI programma deve essere strutturato come segue:
+* attiva un thread produttore ed un insieme di k thread consumatori 
+* il produttore comunica con i consumatori mediante una coda 
+* il produttore visita ricorsivamente la directory data ed, eventualmente tutte le sottodirectory e mette nella coda il nome di ogni directory individuata 
+* i consumatori prelevano dalla coda i nomi delle directories e stampano il loro contenuto  (nomi dei file)
+* la coda deve essere realizzata con una LinkedList. Ricordiamo che una Linked List non è una struttura thread-safe. Dalle API JAVA *“Note that the implementation is not synchronized. If multiple threads access a linked list concurrently, and at least one of the threads modifies the list structurally, it must be synchronized externally”*
+<br>
+
+## Assignment 06 - Conti correnti
+
+* Creare un file contenente oggetti che rappresentano i conti correnti di una banca. Ogni conto corrente contiene il nome del correntista ed una lista di movimenti. I movimenti registrati per un conto corrente sono relativi agli ultimi 2 anni, quindi possono essere molto numerosi.  
+    * per ogni movimento vengono registrati la data e la causale del movimento.  
+    * l'insieme delle causali possibili è fissato: Bonifico, Accredito, Bollettino, F24, PagoBancomat.  
+    * NB: Scrivete un programma che crei il file  
+    
+* Scrivere un programma che rilegge il file e trova, per ogni possibile causale, quanti movimenti hanno quella causale.
+    * progettare un'applicazione che attiva un insieme di thread. Uno di essi legge dal file gli oggetti “conto corrente” e li passa, uno per volta, ai thread presenti in un thread pool.
+    * ogni thread calcola il numero di occorrenze di ogni possibile causale all'interno di quel conto corrente ed aggiorna un contatore globale.
+    * alla fine il programma stampa per ogni possibile causale il numero totale di occorrenze.
+    
+* Utilizzare NIO per l'interazione con il file e JSON per la serializzazione
+<br>
+
+## Assignment 07 - Mini Web Server
+
+Scrivere un programma JAVA che implementa un server HTTP che gestisce richieste di trasferimento di file di diverso tipo (es. immagini jpeg, gif) provenienti da un browser web.
+
+Il server
+* sta in ascolto su una porta nota al client (es. 6789)
+* gestisce richieste HTTP di tipo GET alla Request URL localhost:port/filename
+
+Ulteriori indicazioni
+* le connessioni possono essere non persistenti.
+* usare le classi Socket e ServerSocket per sviluppare il programma server
+* per inviare al server le richieste, utilizzare un qualsiasi browser
