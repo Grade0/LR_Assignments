@@ -35,17 +35,20 @@ public class EchoClient implements Runnable{
     public void run() {
         try {
             if (this.strToEcho == null) {
-                Scanner in = new Scanner(System.in);//Input
+                //lettura del messaggio da inviare da console
+                Scanner in = new Scanner(System.in);
                 System.out.print("String to be echoed: ");
                 strToEcho = in.next();
             }
+
+            //apertura SocketChannel e connessione con il server
             SocketChannel connectionSocket = SocketChannel.open();
             System.out.println("Connecting...");
             connectionSocket.connect(new InetSocketAddress("127.0.0.1", 6789));
             System.out.println("Connected. Sending \"" + strToEcho + "\"...");
 
-
-            ByteBuffer myBuffer = ByteBuffer.wrap(strToEcho.getBytes());
+            ByteBuffer myBuffer = ByteBuffer.allocate(128);
+            myBuffer.put(strToEcho.getBytes());
 
             //Scrittura del messaggio sul canale per l'invio al server
             while(myBuffer.hasRemaining()) {
@@ -58,17 +61,19 @@ public class EchoClient implements Runnable{
             myBuffer.clear();
 
             System.out.println("Data sent. Awating echo...");
-            myBuffer = ByteBuffer.allocate(128);
             String bufferOutput = "";
+
+            //Lettura dal canale del messaggio inviato dal server
             while(connectionSocket.read(myBuffer) > 0) {
                 myBuffer.flip();
                 bufferOutput += StandardCharsets.UTF_8.decode(myBuffer).toString();
                 myBuffer.compact();
             }
 
-            myBuffer.flip();
-            System.out.println(bufferOutput);
+            System.out.println("Messaggio ricevuto: \"" + bufferOutput + "\"");
             System.out.println("Disconected from EchoServer");
+
+            //chiusura della connessione
             connectionSocket.close();
         } catch (IOException ignored) {}
     }

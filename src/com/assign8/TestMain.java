@@ -3,8 +3,7 @@ package com.assign8;
 public class TestMain {
 
     /**
-     *
-     * Test server in un scenario
+     * Test per simulare la connessione del server da parte di più client
      */
 
     public static void main(String[] args) throws InterruptedException {

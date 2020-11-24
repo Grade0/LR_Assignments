@@ -51,6 +51,7 @@ public class EchoServer implements Runnable {
                 while(iter.hasNext()) {
                     SelectionKey key = iter.next();
                     iter.remove();
+
                     if(key.isAcceptable()) {
                         this.acceptNewConnection(selector, key);
                     }
@@ -81,9 +82,9 @@ public class EchoServer implements Runnable {
         ServerSocketChannel server = (ServerSocketChannel) key.channel();
         SocketChannel c_channel = server.accept();
         c_channel.configureBlocking(false);
-        //crea il buffer di dimensione 256 bytes
+        //crea il buffer di dimensione 128 bytes
         ByteBuffer myBuffer = ByteBuffer.allocate(128);
-        // aggiunge il canale del client al selector con l'operazione OP_WRITE
+        // aggiunge il canale del client al selector con l'operazione OP_READ
         // e aggiunge il bytebuffer come attachment
         c_channel.register(selettore, SelectionKey.OP_READ, myBuffer);
         System.out.println("Accettata nuova connessione dal client: " + c_channel.getRemoteAddress());
@@ -106,13 +107,15 @@ public class EchoServer implements Runnable {
             while(c_channel.read(myBuffer) > 0) {
                 myBuffer.flip();
                 bufferOutput = StandardCharsets.UTF_8.decode(myBuffer).toString();
-                myBuffer.compact();
                 message += bufferOutput;
+                myBuffer.compact();
             }
         } catch (IOException e)  {
             e.printStackTrace();
         }
-        System.out.println("Messaggio ricevuto dal client: " + bufferOutput);
+        System.out.println("Messaggio ricevuto dal client: " + message);
+
+        //verifico se la stinga ricevuta è quella speciale di terminazione
         if (message.equals("exit")) {
             message = "Server: 'exit' keyword riceived, EchoServer shutted down!";
             EchoServer.shutdownServer();
