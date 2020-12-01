@@ -11,9 +11,9 @@ Il thread T effettua un ciclo infinito per il calcolo di π usando la serie di G
 
 Il thread esce dal ciclo quando una delle due condizioni seguenti risulta verificata:
 
-1. il thread è stato interrotto
+* il thread è stato interrotto
 
-2. la differenza tra il valore stimato di π ed il valore Math.PI (della libreria JAVA) è minore di accuracy
+* la differenza tra il valore stimato di π ed il valore Math.PI (della libreria JAVA) è minore di accuracy
 <br>
 
 ## Assignment 02 - Ufficio Postale
@@ -94,3 +94,11 @@ Ulteriori indicazioni
 * le connessioni possono essere non persistenti.
 * usare le classi Socket e ServerSocket per sviluppare il programma server
 * per inviare al server le richieste, utilizzare un qualsiasi browser
+<br>
+
+## Assignment 08 - NIO Echo Server
+
+Scrivere un programma echo server usando la libreria java NIO e, in particolare, il Selector e canali in modalità non bloccante, e un programma echo client, usando NIO (va bene anche con modalità bloccante).
+
+* Il server accetta richieste di connessioni dai client, riceve messaggi inviati dai client e li rispedisce (eventualmente aggiungendo "echoed by server" al messaggio ricevuto).
+* Il client legge il messaggio da inviare da console, lo invia al server e visualizza quanto ricevuto dal server.
