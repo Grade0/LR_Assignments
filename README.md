@@ -162,3 +162,15 @@ stampa un riassunto simile a quello stampato dal PING UNIX
 * se decide di effettuare l'eco del PING, il server attende un intervallo di tempo casuale per simulare la latenza di rete
 
 * stampa l'indirizzo IP e la porta del client, il messaggio di PING e l'azione intrapresa dal server in seguito alla sua ricezione (PING non inviato, oppure PING ritardato di x ms)
+<br>
+
+## Assignment 10 - UDP Time Server
+
+Definire un Server TimeServer, che
+
+* invia su un gruppo di multicast  dategroup, ad intervalli regolari, la data e l’ora.  
+* attende tra un invio ed il successivo un intervallo di tempo simulata mediante il metodo  sleep().
+
+L’indirizzo IP di dategroup viene introdotto  da linea di comando.
+
+Definire quindi un client TimeClient che si unisce a dategroup e riceve, per dieci volte consecutive, data ed ora, le visualizza, quindi termina.
