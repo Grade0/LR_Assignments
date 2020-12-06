@@ -1,4 +1,4 @@
-package com.assign10;
+package com.assignm10;
 
 import java.io.IOException;
 import java.net.DatagramPacket;

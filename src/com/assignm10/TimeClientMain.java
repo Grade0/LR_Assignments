@@ -1,11 +1,9 @@
-package com.assign10;
+package com.assignm10;
 
 import org.apache.commons.cli.*;
-import org.apache.commons.cli.Options;
 import java.net.UnknownHostException;
 
-
-public class TimeServerMain {
+public class TimeClientMain {
     final static int DEFAULT_PORT = 30000;
 
     public static void __printArgError(int n) {
@@ -30,7 +28,7 @@ public class TimeServerMain {
             cmd = parser.parse(options, args);
         } catch (ParseException e) {
             System.err.println(e.getMessage());
-            formatter.printHelp("java TimeServerMain", options);
+            formatter.printHelp("java TimeClientMain", options);
             System.exit(1);
         }
 
@@ -45,8 +43,8 @@ public class TimeServerMain {
             __printArgError(1);
         }
         try {
-            TimeServer server = new TimeServer(IPAddress, DEFAULT_PORT);
-            server.start();
+            TimeClient client = new TimeClient(IPAddress, DEFAULT_PORT);
+            client.start();
         } catch (UnknownHostException e) {             // l'indirizzo passato non è valido
             System.err.println("L'indirizzo immesso non è valido");
         } catch (IllegalArgumentException e) {          // l'indirizzo passato non è un indirizzo multicast
