@@ -45,6 +45,12 @@ public class MainClient {
         System.out.print("****\t\t> ");
     }
 
+
+    /**
+     * metodo che simula la navigazione del menu del client con le operazioni di
+     * registrazione, recupero del calendario e uscita
+     * @param congresso interfaccia remota (stub)
+     */
     public static void avvioMenu(InterfacciaCongresso congresso) {
 
         int n;
@@ -66,28 +72,25 @@ public class MainClient {
                             giorno = input.nextInt();
                         } while (giorno < 0 || giorno > 3);
                         if (giorno != 0) {
-                            //congresso.getGiornate()[giorno - 1];
+
                             do {
                                 System.out.print("A quale sessione ci si vuole iscrivere?\n[1-12] ");
                                 sessione = input.nextInt();
                             } while(sessione < 1 || sessione > 12);
 
-                            //congresso.getGiornate()[giorno - 1].sessioni[sessione - 1];
                             do {
                                 System.out.print("A quale intervento ci si vuole iscrivere?\n[1-5] ");
                                 intervento = input.nextInt();
                             } while (intervento < 1 || intervento > 5);
 
-                            if (congresso.getInterventi(giorno - 1, sessione - 1)[intervento - 1] == null) {
+                            if (!congresso.slotBooked(giorno - 1, sessione - 1,intervento - 1)) {
                                 System.out.print("Perfetto, a che nome? ");
                                 name = input.next();
                                 if (congresso.registerNewSpeaker(giorno - 1, sessione - 1, intervento - 1, name)) {
-                                    System.out.println("Speaker " + congresso.getInterventi(giorno - 1, sessione - 1)[intervento - 1].getNomeSpeaker() + " registrato con successo!");
+                                    System.out.println("Speaker " + congresso.getSpeaker(giorno - 1, sessione - 1,intervento - 1) + " registrato con successo!");
                                 } else System.err.println("Errore");
-                                //congresso.getGiornate()[giorno - 1].sessioni[sessione - 1].interventi[intervento - 1];
                             } else {
-                                //congresso.getGiornate()[giorno - 1].sessioni[sessione - 1].interventi[intervento - 1];
-                                System.err.println("Spiacenti, intervento già prenotato da " + congresso.getInterventi(giorno - 1, sessione - 1)[intervento - 1].getNomeSpeaker());
+                                System.err.println("Spiacenti, intervento già prenotato da " + congresso.getSpeaker(giorno - 1, sessione - 1,intervento - 1));
                             }
                         }
                     }
@@ -97,9 +100,9 @@ public class MainClient {
 
                     break;
                 case 2:
-                    System.out.println("Recupero del programma dal server");
+                    System.out.println("Recupero del programma dal server\n");
                     try {
-                        if (congresso.getGiornate() == null)
+                        if (!congresso.isInitialized())
                             System.out.println("Il congresso è ancora vuoto.");
                         else {
                             System.out.println(congresso.getSchedule());

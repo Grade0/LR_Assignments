@@ -6,68 +6,90 @@ import java.rmi.server.RemoteServer;
 
 public class Congresso extends RemoteServer implements InterfacciaCongresso {
 
-    private GiornataCongresso[] giornate;
+    private final int days, sessions, slots;
+    private final  GiornataCongresso[] giornate;
 
-    Congresso(int nDays, int nSessionsPerDay, int maxParticipationsPerSession) throws RemoteException {
+    Congresso(int nDays, int nSessionsPerDay, int maxSlotsPerSession) throws RemoteException {
+        this.days = nDays;
+        this.sessions = nSessionsPerDay;
+        this.slots = maxSlotsPerSession;
         this.giornate = new GiornataCongresso[nDays];
-        for (int i = 0; i < nDays; i++) this.giornate[i] = new GiornataCongresso(i+1, nSessionsPerDay, maxParticipationsPerSession);
+
+        for (int i = 0; i < nDays; i++) this.giornate[i] = new GiornataCongresso(i+1, nSessionsPerDay, maxSlotsPerSession);
     }
 
     @Override
-    public String getSchedule() throws RemoteException {
-        String message = "";
-        for (int i = 0; i < 3; i++) {
-            message += "Giornata " + giornate[i].getnGiornata() + "\n";
-            SessioneCongresso[] sessioni = this.getSessioni(i);
-            for (int j = 0; j < 12; j++) {
-                message += "S" + sessioni[j].getnSessione() + "\t";
-                InterventoCongresso[] interventi = this.getInterventi(i, j);
-                for (int k = 0; k < 5; k++) {
-                    message += k+1 + ". ";
+    public synchronized StringBuilder getSchedule() throws RemoteException {
+        StringBuilder message = new StringBuilder();
+
+        for (int giornata = 0; giornata < this.days; giornata++) {
+            message.append("Giornata " + giornate[giornata].getnGiornata() + "\n");
+            SessioneCongresso[] sessioni = this.getSessioni(giornata);
+
+            for (int sessione = 0; sessione < this.sessions; sessione++) {
+                message.append("S" + sessioni[sessione].getnSessione() + "\t");
+                InterventoCongresso[] interventi = this.getInterventi(giornata, sessione);
+
+                for (int slot = 0; slot < this.slots; slot++) {
+                    message.append(slot+1 + ". ");
                     try {
-                        message += interventi[k].getNomeSpeaker() + ", ";
+                        message.append(interventi[slot].getNomeSpeaker() + ", ");
                     }
                     catch (NullPointerException e) {
-                        message +=  "____, ";
+                        message.append("____, ");
                     }
                 }
-                message += "\n";
+                message.append("\n");
             }
-            message += "\n";
+            message.append("\n");
         }
-        message += "\n";
+        message.append("\n");
 
         return message;
     }
 
     @Override
-    public boolean registerNewSpeaker(int nGiorno, int nSessione, int nIntervento, String speaker) throws RemoteException {
+    public synchronized boolean registerNewSpeaker(int nGiorno, int nSessione, int nSlot, String speaker) throws RemoteException {
         boolean esito;
         InterventoCongresso[] interventi = getInterventi(nGiorno, nSessione);
-        if (interventi[nIntervento] != null) {
+        if (interventi[nSlot] != null) {
             System.out.println("[UPDATE] Richiesta di registrazione per " + speaker + " rifiutata: slot occupato.");
             esito = false;
         }
         else {
-            interventi[nIntervento] = new InterventoCongresso(speaker);
-            System.out.println("[UPDATE] Speaker " + speaker + " registrato correttamente nello slot (giorno/sessione/slot): " + (nGiorno+1) + "/" + (nSessione+1) + "/" + (nIntervento+1));
+            interventi[nSlot] = new InterventoCongresso(speaker);
+            System.out.println("[UPDATE] Speaker " + speaker + " registrato correttamente nello slot (giorno/sessione/slot): " + (nGiorno+1) + "/" + (nSessione+1) + "/" + (nSlot+1));
             esito =  true;
         }
 
         return esito;
     }
 
-    public GiornataCongresso[] getGiornate() {
+    public synchronized GiornataCongresso[] getGiornate() throws RemoteException {
         return this.giornate;
     }
 
-    public SessioneCongresso[] getSessioni(int nGiorno) {
+    public synchronized SessioneCongresso[] getSessioni(int nGiorno) throws RemoteException {
         return this.giornate[nGiorno].getSessioni();
     }
 
-    public InterventoCongresso[] getInterventi(int nGiorno, int nSessione) {
+    public synchronized InterventoCongresso[] getInterventi(int nGiorno, int nSessione) throws RemoteException {
         SessioneCongresso[] sessioni = this.giornate[nGiorno].getSessioni();
         InterventoCongresso[] interventi = sessioni[nSessione].getInterventi();
         return interventi;
+    }
+
+    public synchronized String getSpeaker(int nGiorno, int nSessione, int nSlot) throws RemoteException {
+        InterventoCongresso[] interventi = getInterventi(nGiorno, nSessione);
+        return interventi[nSlot].getNomeSpeaker();
+    }
+
+    public synchronized boolean slotBooked(int nGiorno, int nSessione, int nSlot) throws RemoteException {
+        InterventoCongresso[] interventi = getInterventi(nGiorno, nSessione);
+        return interventi[nSlot] != null;
+    }
+
+    public synchronized boolean isInitialized() throws RemoteException {
+        return this.giornate != null;
     }
 }

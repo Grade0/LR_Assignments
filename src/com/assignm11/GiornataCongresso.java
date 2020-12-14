@@ -1,29 +1,27 @@
 package com.assignm11;
 
-import java.io.Serializable;
-
 /**
  * Singola giornata di congresso, contenente le 12 sessioni
  */
-public class GiornataCongresso implements Serializable {
+public class GiornataCongresso{
 
     //Il numero di giornata del congresso
-    private int nGiornata;
+    private final int nGiornata;
 
     //Le 12 sessioni della giornata di congresso
-    private SessioneCongresso[] sessioni;
+    private final SessioneCongresso[] sessioni;
 
     /**
      * Costruttore della classe che istanzia gli attributi
      * @param n la giornata di congresso
      * @param nSession numero di sessione per giorno
-     * @param maxSpeakerPerSession numero massimo di interventi per sessione
+     * @param maxSlotsPerSession numero massimo di interventi per sessione
      */
-    public GiornataCongresso(int n, int nSession, int maxSpeakerPerSession) {
+    public GiornataCongresso(int n, int nSession, int maxSlotsPerSession) {
         this.nGiornata = n;
         this.sessioni = new SessioneCongresso[nSession];
-        for (int i = 0; i < 12; i++) {
-            this.sessioni[i] = new SessioneCongresso(i+1, maxSpeakerPerSession);
+        for (int i = 0; i < nSession; i++) {
+            this.sessioni[i] = new SessioneCongresso(i+1, maxSlotsPerSession);
         }
     }
 
