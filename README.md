@@ -8,7 +8,7 @@ Write a program that activates a thread T that performs the approximate calculat
 
 The main program receives as input from the command line a parameter that indicates the degree of accuracy for the calculation of π and the maximum waiting time after which the main program interrupts the thread T.
 
-Thread T performs an infinite loop for calculating π using the Gregory-Leibniz series (π = 4/1 – 4/3 + 4/5 - 4/7 + 4/9 - 4/11 ...).
+Thread T performs an infinite loop for calculating π using the *Gregory-Leibniz series* (π = 4/1 – 4/3 + 4/5 - 4/7 + 4/9 - 4/11 ...).
 
 The thread exits the loop when one of the following two conditions is verified:
 
@@ -78,7 +78,7 @@ The program must be structured as follows:
 
 * the producer communicates with consumers through a queue
 
-*the producer recursively visits the given directory and eventually all subdirectories and queues the name of each directory detected.
+* the producer recursively visits the given directory and eventually all subdirectories and queues the name of each directory detected.
 
 * consumers take directory names from the queue and print their content (file names)
 
@@ -108,8 +108,8 @@ Write a JAVA program that implements an HTTP server that handles requests for tr
 
 The server
 
-* listens on a port known to the client (e.g. 6789)
-* handles HTTP GET requests to the Request URL localhost: port/filename
+* listens on a port known to the client (*e.g. 6789*)
+* handles HTTP GET requests to the Request URL *localhost: port/filename*
 
 Further indications
 
