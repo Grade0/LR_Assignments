@@ -1,4 +1,4 @@
-## Assignment 01 - Pi
+## Assignment 01 - Pi (π)
 
 Write a program that activates a thread T that performs the approximate calculation of π.
 
@@ -52,12 +52,12 @@ The Polo Marzotto's computer lab is used by three types of users, students, thes
 
 The professors have priority over everyone in the access to the laboratory, the thesis students have priority over the students.
 
-Nobody can be interrupted while using a computer. Write a JAVA program that simulates user and tutor behavior. The program receives as input the number of students, thesis students and professors who use the laboratory and activates a thread for each user. Each user accesses k times to the lab, with k generated randomly. Simulate the time interval between one access and the next one and the time spent in the laboratory using the sleep method. The tutor has to coordinate access to the lab. The program must end when all users have completed their access to the laboratory.
+Nobody can be interrupted while using a computer. Write a JAVA program that simulates user and tutor behavior. The program receives as input the number of students, thesis students and professors who use the laboratory and activates a thread for each user. Each user accesses k times to the lab, with k generated randomly. Simulate the time interval between one access and the next one and the time spent in the laboratory using the sleep method. The tutor has to coordinate access to the lab. The program must end when all users have completed their access to the laboratory.    
 <br>
 
 ## Assignment 04 - Computer lab with Monitor
 
-Solve the problem of the computer lab simulation, of the previous assignment, using the Monitor construct.
+Solve the problem of the computer lab simulation, of the previous assignment, using the Monitor construct.    
 <br>
 
 ## Assignment 05 - File Crawler
@@ -79,6 +79,7 @@ The program must be structured as follows:
 * consumers take directory names from the queue and print their content (file names)
 
 * the queue must be created with a LinkedList. Remember that a Linked List is not a thread-safe structure. From the JAVA API: *“Note that the implementation is not synchronized. If multiple threads access a linked list concurrently, and at least one of the threads modifies the list structurally, it must be synchronized externally”*
+<br>
 
 ## Assignment 06 - Bank accounts
 
@@ -117,12 +118,14 @@ Further indications
 
 Write an echo server program using the java NIO library and, in particular, the Selector and channels in non-blocking mode, and an echo client program, using NIO (also fine with blocking mode).
 
-* The server accepts requests for connections from clients, receives messages sent by clients and sends them back (possibly adding "echoed by server" to the received message).
+* The server accepts requests for connections from clients, receives messages sent by clients and sends them back (possibly adding "echoed by server" to the received message)
 
 * The client reads the message to be sent from the console, sends it to the server and displays what it has received from the server.
 
 <br>
+
 ![Description](/image_assign8.png)
+
 <br>
 
 ## Assignment 09 - UDP Ping
@@ -137,14 +140,14 @@ Also, since the execution of the programs will run on a single host or on the lo
 
 ### PING Client
 
-* accepts two command-line arguments: **server name and port**. If one or more arguments are incorrect, the client terminates after printing an error message like *ERR -arg x*, where x is the argument number.
+* accepts two command-line arguments: **server name and port**. If one or more arguments are incorrect, the client terminates after printing an error message like *ERR -arg x*, where x is the argument number
 
 * uses UDP communication to communicate with the server and sends 10 messages to the server, with the following format:
 
        PING seqno timestamp
     where *seqno* is the PING sequence number (between 0-9) and the *timestamp* (in milliseconds) indicates when the message was sent
 
-* does not send a new PING until it has received the echo of the previous PING, or a timeout has expired.
+* does not send a new PING until it has received the echo of the previous PING, or a timeout has expired
 
 * Print each message sent to the server and the ping RTT or a * if the response was not received within 2 seconds
 
@@ -173,26 +176,24 @@ Also, since the execution of the programs will run on a single host or on the lo
 
 Define a *TimeServer* server, which:
 
-* sends the date and time to a multicast group *dategroups* at regular intervals.
-* waits between one sending and the next a time interval simulated by the sleep () method.
+* sends the date and time to a multicast group *dategroups* at regular intervals
+* waits between one sending and the next a time interval simulated by the sleep () method
 
 The IP address of *dategroup* is introduced by the command-line.
 
-Then define a *TimeClient* client that joins *dategroup* and receives, ten consecutive times, date and time, displays them, then terminates.
+Then define a *TimeClient* client that joins *dategroup* and receives, ten consecutive times, date and time, displays them, then terminates.    
 <br>
 
 ## Assignment 11 - Congress management
 
-Design a Client/Server application for managing registrations at a congress. The organization of the congress provides the speakers of the various sessions with an interface through which to subscribe to a session, and the possibility of viewing the programs of the various days of the congress, with the interventions of the various sessions. The server maintains the programs of the 3 days of the congress, each of which is stored in a data structure, in which each line corresponds to a session (in total 12 for each day).
-
-For each session, the names of the registered speakers (maximum 5) are stored.
+Design a Client/Server application for managing registrations at a congress. The organization of the congress provides the speakers of the various sessions with an interface through which to subscribe to a session, and the possibility of viewing the programs of the various days of the congress, with the interventions of the various sessions. The server maintains the programs of the 3 days of the congress, each of which is stored in a data structure, in which each line corresponds to a session (in total 12 for each day). For each session, the names of the registered speakers (maximum 5) are stored.
 
 The client can request operations to:
 
-* register a speaker at a session;
-* get the program of the congress;
+* register a speaker at a session
+* get the program of the congress
 
-The client forwards requests to the server via the **RMI** mechanism. Provide, for each possible operation, the management of any abnormal conditions (for example the request for registration to a non-existent day and/or session or for which all the intervention spaces have already been covered) 
+The client forwards requests to the server via the **RMI** mechanism. Provide, for each possible operation, the management of any abnormal conditions (for example the request for registration to a non-existent day and/or session or for which all the intervention spaces have already been covered).
 
 The client is implemented as a cyclic process that continues making synchronous requests until all user needs are exhausted. Establish an appropriate termination condition for the request process.
 
