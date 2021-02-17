@@ -1,3 +1,7 @@
+# LR_Assignments
+"Network Programming" Class Assignments - University of Pisa    
+<br>
+
 ## Assignment 01 - Pi (π)
 
 Write a program that activates a thread T that performs the approximate calculation of π.
