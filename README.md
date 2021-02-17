@@ -122,7 +122,7 @@ Write an echo server program using the java NIO library and, in particular, the 
 * The client reads the message to be sent from the console, sends it to the server and displays what it has received from the server.
 
 <br>
-![Description](/image_assgn8.png)
+![Description](/image_assign8.png)
 <br>
 
 ## Assignment 09 - UDP Ping
@@ -167,6 +167,7 @@ Also, since the execution of the programs will run on a single host or on the lo
 * if it decides to echo the PING, the server waits for a random amount of time to simulate network latency
 
 * prints the IP address and port of the client, the PING message and the action taken by the server following its reception (PING not sent, or PING delayed by x ms)
+<br>
 
 ## Assignment 10 - UDP Time Server
 
