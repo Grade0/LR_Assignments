@@ -1,5 +1,7 @@
 # LR_Assignments
-"Network Programming" Class Assignments - University of Pisa    
+"Network Programming" Class Assignments - University of Pisa
+
+**Click [[here](/AssignmentsText_IT.pdf)] for Italian version**    
 <br>
 
 ## Assignment 01 - Pi (π)
@@ -181,7 +183,7 @@ Also, since the execution of the programs will run on a single host or on the lo
 Define a *TimeServer* server, which:
 
 * sends the date and time to a multicast group *dategroups* at regular intervals
-* waits between one sending and the next a time interval simulated by the sleep () method
+* waits between one sending and the next, a time interval, simulated by the sleep () method
 
 The IP address of *dategroup* is introduced by the command-line.
 
