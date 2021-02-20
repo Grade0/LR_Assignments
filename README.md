@@ -1,7 +1,7 @@
 # LR_Assignments
-"Network Programming" Class Assignments - University of Pisa
-
-**Click [[here](/AssignmentsText_IT.pdf)] for Italian version**    
+"Network Programming" Class Assignments - University of Pisa    
+<br>
+**Click [[here](/AssignmentsText_IT.pdf)] for Italian version**
 <br>
 
 ## Assignment 01 - Pi (π)
